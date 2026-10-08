@@ -1,0 +1,44 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function admin() {
+      // Email должен принадлежать владельцу. Простого совпадения строки на клиенте недостаточно.
+      return signedIn()
+        && request.auth.token.email == 'arsensal06@gmail.com'
+        && request.auth.token.email_verified == true;
+    }
+    function validConfig() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['tours', 'settings', 'lastUpdated'])
+        && (!('tours' in d) || (d.tours is list && d.tours.size() <= 200))
+        && (!('settings' in d) || d.settings is map)
+        && d.lastUpdated is string;
+    }
+    match /site_config/main {
+      allow read: if true;
+      allow create, update: if admin() && validConfig();
+      allow delete: if false;
+    }
+    match /bookings/{bookingId} {
+      allow read: if admin() || (signedIn() && resource.data.userId == request.auth.uid);
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['id', 'userId', 'userEmail', 'userName', 'userPhone', 'tourId', 'tourTitle', 'tourPrice', 'status', 'date'])
+        && request.resource.data.id == bookingId
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.userEmail == request.auth.token.email
+        && request.resource.data.status == 'pending'
+        && request.resource.data.tourId is int
+        && request.resource.data.tourTitle is string && request.resource.data.tourTitle.size() <= 300
+        && request.resource.data.tourPrice is string && request.resource.data.tourPrice.size() <= 100
+        && request.resource.data.userName is string && request.resource.data.userName.size() > 0 && request.resource.data.userName.size() <= 50
+        && request.resource.data.userPhone is string && request.resource.data.userPhone.size() >= 10 && request.resource.data.userPhone.size() <= 20
+        && request.resource.data.date is string && request.resource.data.date.size() <= 50;
+      allow update: if admin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])
+        && request.resource.data.status in ['pending', 'confirmed', 'cancelled'];
+      allow delete: if admin();
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}

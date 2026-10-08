@@ -1,0 +1,364 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+	<head>
+		<title>KubanAdventures — Эко-приключения на Кавказе</title>
+<meta name="description" content="Авторские джип-туры, SUP-прогулки и походы по Краснодарскому краю. Выберите маршрут и отправьте заявку на путешествие." />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<!-- Firebase SDK -->
+		<script src="assets/js/vendor/firebase-app-compat.js"></script>
+		<script src="assets/js/vendor/firebase-auth-compat.js"></script>
+		<script src="assets/js/vendor/firebase-firestore-compat.js"></script>
+
+		<style>
+			/* Дополнительные стили для карточек туров */
+			.tour-card {
+				background: rgba(255, 255, 255, 0.05);
+				border: 1px solid rgba(255, 255, 255, 0.1);
+				border-radius: 4px;
+				padding: 1.5em;
+				margin-bottom: 1.5em;
+				transition: all 0.3s ease;
+			}
+			.tour-card:hover {
+				background: rgba(255, 255, 255, 0.08);
+				border-color: rgba(255, 255, 255, 0.2);
+				transform: translateY(-5px);
+			}
+			.tour-card h3 {
+				margin-top: 0;
+				color: #ffffff;
+				font-size: 1.25em;
+			}
+			.tour-card .tour-meta {
+				display: flex;
+				gap: 1em;
+				margin: 1em 0;
+				font-size: 0.9em;
+				opacity: 0.8;
+			}
+			.tour-card .tour-price {
+				color: #f2849e;
+				font-size: 1.5em;
+				font-weight: bold;
+				margin: 0.5em 0;
+			}
+			.filter-buttons {
+				display: flex;
+				gap: 0.5em;
+				flex-wrap: wrap;
+				margin-bottom: 2em;
+			}
+			.filter-btn {
+				padding: 0.5em 1em;
+				background: rgba(255, 255, 255, 0.075);
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				color: #ffffff;
+				border-radius: 4px;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				font-size: 0.9em;
+			}
+			.filter-btn:hover,
+			.filter-btn.active {
+				background: rgba(255, 255, 255, 0.2);
+				border-color: #ffffff;
+			}
+			#auth-controls {
+				position: absolute;
+				top: 1em;
+				right: 1em;
+				z-index: 1000;
+			}
+			#auth-controls button {
+				margin-left: 0.5em;
+			}
+			.user-info {
+				color: #ffffff;
+				font-size: 0.9em;
+				display: inline-block;
+				margin-right: 1em;
+			}
+			/* Стили модальных окон для бронирования */
+			.booking-form {
+				margin-top: 2em;
+				padding-top: 2em;
+				border-top: 1px solid rgba(255, 255, 255, 0.2);
+			}
+			.form-message {
+				padding: 1em;
+				margin: 1em 0;
+				border-radius: 4px;
+				display: none;
+			}
+			.form-message.success {
+				background: rgba(76, 175, 80, 0.2);
+				border: 1px solid rgba(76, 175, 80, 0.5);
+				color: #4CAF50;
+			}
+			.form-message.error {
+				background: rgba(244, 67, 54, 0.2);
+				border: 1px solid rgba(244, 67, 54, 0.5);
+				color: #F44336;
+			}
+		</style>
+	<link rel="stylesheet" href="assets/css/enhancements.css" />
+</head>
+	<body class="is-preload">
+
+		<!-- Контролы авторизации -->
+		<div id="auth-controls">
+			<span class="user-info" id="userInfo" style="display:none;"></span>
+			<button class="button small" id="authBtn" onclick="openAuthModal()">Войти</button>
+			<button class="button small" id="cabinetBtn" style="display:none;" onclick="openCabinetModal()">Кабинет</button>
+			<button class="button small" id="logoutBtn" style="display:none;" onclick="handleLogout()">Выйти</button>
+			<button class="button small primary" id="adminBtn" style="display:none;" onclick="window.location.href='admin.html'">Админ</button>
+		</div>
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header">
+				<div class="logo">
+					<svg viewBox="0 0 64 64" width="44" height="44" aria-hidden="true"><path d="M5 50 25 17l10 17 8-12 16 28Z" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="m18 29 7 5 5-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+				</div>
+				<div class="content">
+					<div class="inner">
+						<p class="eyebrow" id="heroSubtitle"></p><h1 id="heroTitle"></h1><p class="brand-caption">KubanAdventures · Краснодарский край</p>
+						<p>Премиальные эко-приключения по самым живописным местам Краснодарского края<br />
+						Выберите регион и откройте для себя дикую природу Кавказа</p>
+					</div>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="#sochi">Сочи</a></li>
+						<li><a href="#gelendzhik">Геленджик</a></li>
+						<li><a href="#anapa">Анапа</a></li>
+						<li><a href="#novorossiysk">Новороссийск</a></li>
+						<li><a href="#polyana">Красная Поляна</a></li>
+						<li><a href="#abrau">Абрау-Дюрсо</a></li>
+						<li><a href="#lagonaki">Лаго-Наки</a></li>
+						<li><a href="#about">О нас</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<!-- Main -->
+			<div id="main">
+
+				<!-- Сочи -->
+				<article id="sochi">
+					<h2 class="major">Туры в Сочи</h2>
+					<span class="image main"><img src="images/sochi.webp" alt="Зелёное речное ущелье — атмосферная иллюстрация" loading="lazy" width="740" height="460" /></span>
+					<p>Субтропики, ущелья и водопады — откройте для себя уникальную природу курортной столицы России.</p>
+
+					<div class="filter-buttons">
+						<button class="filter-btn active" onclick="filterTours('sochi', 'all')">Все</button>
+						<button class="filter-btn" onclick="filterTours('sochi', 'jeep')">🚙 Джип-туры</button>
+						<button class="filter-btn" onclick="filterTours('sochi', 'quad')">🏍️ Квадроциклы</button>
+						<button class="filter-btn" onclick="filterTours('sochi', 'sup')">🏄 SUP</button>
+						<button class="filter-btn" onclick="filterTours('sochi', 'hiking')">🥾 Хайкинг</button>
+					</div>
+
+					<div id="tours-sochi" class="tours-container"></div>
+				</article>
+
+				<!-- Геленджик -->
+				<article id="gelendzhik">
+					<h2 class="major">Туры в Геленджик</h2>
+					<span class="image main"><img src="images/gelendzhik.webp" alt="Лесистое морское побережье — атмосферная иллюстрация" loading="lazy" width="740" height="460" /></span>
+					<p>Белые скалы и сосновые леса — исследуйте живописное побережье Черного моря.</p>
+
+					<div class="filter-buttons">
+						<button class="filter-btn active" onclick="filterTours('gelendzhik', 'all')">Все</button>
+						<button class="filter-btn" onclick="filterTours('gelendzhik', 'jeep')">🚙 Джип-туры</button>
+						<button class="filter-btn" onclick="filterTours('gelendzhik', 'quad')">🏍️ Квадроциклы</button>
+						<button class="filter-btn" onclick="filterTours('gelendzhik', 'sup')">🏄 SUP</button>
+						<button class="filter-btn" onclick="filterTours('gelendzhik', 'hiking')">🥾 Хайкинг</button>
+					</div>
+
+					<div id="tours-gelendzhik" class="tours-container"></div>
+				</article>
+
+				<!-- Анапа -->
+				<article id="anapa">
+					<h2 class="major">Туры в Анапу</h2>
+					<span class="image main"><img src="images/anapa.webp" alt="Дюны на рассвете — атмосферная иллюстрация" loading="lazy" width="740" height="460" /></span>
+					<p>Песчаные дюны и кипарисы — насладитесь уникальной природой солнечного курорта.</p>
+
+					<div class="filter-buttons">
+						<button class="filter-btn active" onclick="filterTours('anapa', 'all')">Все</button>
+						<button class="filter-btn" onclick="filterTours('anapa', 'jeep')">🚙 Джип-туры</button>
+						<button class="filter-btn" onclick="filterTours('anapa', 'quad')">🏍️ Квадроциклы</button>
+						<button class="filter-btn" onclick="filterTours('anapa', 'sup')">🏄 SUP</button>
+						<button class="filter-btn" onclick="filterTours('anapa', 'hiking')">🥾 Хайкинг</button>
+					</div>
+
+					<div id="tours-anapa" class="tours-container"></div>
+				</article>
+
+				<!-- Новороссийск -->
+				<article id="novorossiysk">
+					<h2 class="major">Туры в Новороссийск</h2>
+					<span class="image main"><img src="images/novorossiysk.webp" alt="Скалистая бухта — атмосферная иллюстрация" loading="lazy" width="740" height="460" /></span>
+					<p>Горные хребты и морская сила — почувствуйте мощь природы города-героя.</p>
+
+					<div class="filter-buttons">
+						<button class="filter-btn active" onclick="filterTours('novorossiysk', 'all')">Все</button>
+						<button class="filter-btn" onclick="filterTours('novorossiysk', 'jeep')">🚙 Джип-туры</button>
+						<button class="filter-btn" onclick="filterTours('novorossiysk', 'quad')">🏍️ Квадроциклы</button>
+						<button class="filter-btn" onclick="filterTours('novorossiysk', 'sup')">🏄 SUP</button>
+						<button class="filter-btn" onclick="filterTours('novorossiysk', 'hiking')">🥾 Хайкинг</button>
+					</div>
+
+					<div id="tours-novorossiysk" class="tours-container"></div>
+				</article>
+
+				<!-- Красная Поляна -->
+				<article id="polyana">
+					<h2 class="major">Красная Поляна</h2>
+					<span class="image main"><img src="images/polyana.webp" alt="Горная долина — атмосферная иллюстрация" loading="lazy" width="740" height="460" /></span>
+					<p>Высокогорные тропы и пики — покорите вершины горного курорта.</p>
+
+					<div class="filter-buttons">
+						<button class="filter-btn active" onclick="filterTours('polyana', 'all')">Все</button>
+						<button class="filter-btn" onclick="filterTours('polyana', 'jeep')">🚙 Джип-туры</button>
+						<button class="filter-btn" onclick="filterTours('polyana', 'quad')">🏍️ Квадроциклы</button>
+						<button class="filter-btn" onclick="filterTours('polyana', 'sup')">🏄 SUP</button>
+						<button class="filter-btn" onclick="filterTours('polyana', 'hiking')">🥾 Хайкинг</button>
+					</div>
+
+					<div id="tours-polyana" class="tours-container"></div>
+				</article>
+
+				<!-- Абрау-Дюрсо -->
+				<article id="abrau">
+					<h2 class="major">Абрау-Дюрсо</h2>
+					<span class="image main"><img src="images/abrau.webp" alt="Озеро среди холмов — атмосферная иллюстрация" loading="lazy" width="740" height="460" /></span>
+					<p>Изумрудные озера и холмы — откройте край виноделия и природных красот.</p>
+
+					<div class="filter-buttons">
+						<button class="filter-btn active" onclick="filterTours('abrau', 'all')">Все</button>
+						<button class="filter-btn" onclick="filterTours('abrau', 'jeep')">🚙 Джип-туры</button>
+						<button class="filter-btn" onclick="filterTours('abrau', 'quad')">🏍️ Квадроциклы</button>
+						<button class="filter-btn" onclick="filterTours('abrau', 'sup')">🏄 SUP</button>
+						<button class="filter-btn" onclick="filterTours('abrau', 'hiking')">🥾 Хайкинг</button>
+					</div>
+
+					<div id="tours-abrau" class="tours-container"></div>
+				</article>
+
+				<!-- Лаго-Наки -->
+				<article id="lagonaki">
+					<h2 class="major">Лаго-Наки</h2>
+					<span class="image main"><img src="images/lagonaki.webp" alt="Альпийские луга — атмосферная иллюстрация" loading="lazy" width="740" height="460" /></span>
+					<p>Альпийские луга и пещеры — исследуйте уникальное плато Кавказского заповедника.</p>
+
+					<div class="filter-buttons">
+						<button class="filter-btn active" onclick="filterTours('lagonaki', 'all')">Все</button>
+						<button class="filter-btn" onclick="filterTours('lagonaki', 'jeep')">🚙 Джип-туры</button>
+						<button class="filter-btn" onclick="filterTours('lagonaki', 'quad')">🏍️ Квадроциклы</button>
+						<button class="filter-btn" onclick="filterTours('lagonaki', 'sup')">🏄 SUP</button>
+						<button class="filter-btn" onclick="filterTours('lagonaki', 'hiking')">🥾 Хайкинг</button>
+					</div>
+
+					<div id="tours-lagonaki" class="tours-container"></div>
+				</article>
+
+				<!-- О нас -->
+				<article id="about">
+					<h2 class="major">О нас</h2>
+					<span class="image main"><img src="images/hero.webp" alt="Горные хребты на рассвете — атмосферная иллюстрация" loading="lazy" width="740" height="460" /></span>
+					<p><strong>KubanAdventures</strong> — ведущее туристическое агентство премиум-класса, специализирующееся на организации эко-приключений по Краснодарскому краю.</p>
+					<h3>Наш подход</h3><div class="stats-grid" id="aboutStats"></div>
+					<p>Мы создаем безопасные и незабываемые путешествия по самым живописным и труднодоступным уголкам Кавказа.</p>
+				</article>
+
+				<article id="tour-details"><h2 class="major" id="detailTitle">Маршрут</h2><div id="detailContent"></div></article>
+<article id="booking"><h2 class="major">Заявка на путешествие</h2><p id="bookingTourTitle"></p><form id="bookingForm"><div class="fields"><div class="field"><label for="bookingName">Имя</label><input type="text" id="bookingName" autocomplete="name" maxlength="50" required /></div><div class="field"><label for="bookingPhone">Телефон</label><input id="bookingPhone" type="tel" autocomplete="tel" required maxlength="20" /></div></div><p>Это заявка, не оплата и не подтверждённое бронирование. Дату и детали согласует менеджер.</p><button class="primary" type="submit">Отправить заявку</button><div id="bookingMessage" class="form-message" role="status" aria-live="polite"></div></form></article>
+<!-- Модальное окно авторизации -->
+				<article id="auth" style="display:none;">
+					<h2 class="major" id="authTitle">Вход в систему</h2>
+					<div class="form-message" id="authMessage" role="status" aria-live="polite"></div>
+
+					<div id="loginForm">
+						<form onsubmit="handleEmailLogin(event)">
+							<div class="fields">
+								<div class="field">
+									<label for="loginEmail">Email</label>
+									<input type="email" name="loginEmail" id="loginEmail" required />
+								</div>
+								<div class="field">
+									<label for="loginPassword">Пароль</label>
+									<input type="password" name="loginPassword" id="loginPassword" required />
+								</div>
+							</div>
+							<ul class="actions">
+								<li><input type="submit" value="Войти" class="primary" /></li>
+								<li><a href="#" onclick="switchToRegister(); return false;">Регистрация</a></li><li><button type="button" onclick="resetPassword()">Сбросить пароль</button></li>
+							</ul>
+						</form>
+					</div>
+
+					<div id="registerForm" style="display:none;">
+						<form onsubmit="handleEmailRegister(event)">
+							<div class="fields">
+								<div class="field">
+									<label for="regName">Имя</label>
+									<input type="text" name="regName" id="regName" required />
+								</div>
+								<div class="field">
+									<label for="regEmail">Email</label>
+									<input type="email" name="regEmail" id="regEmail" required />
+								</div>
+								<div class="field">
+									<label for="regPassword">Пароль (минимум 6 символов)</label>
+									<input type="password" name="regPassword" id="regPassword" required minlength="6" />
+								</div>
+							</div>
+							<ul class="actions">
+								<li><input type="submit" value="Зарегистрироваться" class="primary" /></li>
+								<li><a href="#" onclick="switchToLogin(); return false;">Уже есть аккаунт</a></li>
+							</ul>
+						</form>
+					</div>
+				</article>
+
+				<!-- Личный кабинет -->
+				<article id="cabinet" style="display:none;">
+					<h2 class="major">Личный кабинет</h2>
+					<p id="cabinetUserInfo"></p>
+					<h3>Мои заявки:</h3>
+					<div id="cabinetBookings"></div>
+				</article>
+
+			</div>
+
+			<!-- Footer -->
+			<footer id="footer">
+				<div id="footerContacts" class="footer-contacts"></div><p class="copyright">&copy; 2026 KubanAdventures. Все права защищены. Дизайн на основе <a href="https://html5up.net" target="_blank" rel="noopener">HTML5 UP</a>.</p><p class="image-note">Обложки — AI-иллюстрации атмосферы путешествий, не фотографии конкретных маршрутов.</p>
+			</footer>
+
+		</div>
+
+		<!-- BG -->
+		<div id="bg"></div>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+
+<script src="assets/js/defaults.js"></script>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
