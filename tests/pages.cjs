@@ -1,0 +1,28 @@
+const {chromium}=require('playwright'),fs=require('fs'),path=require('path'),assert=require('assert/strict');
+(async()=>{
+ const browser=await chromium.launch({headless:true,executablePath:require('child_process').execSync('command -v chromium').toString().trim(),args:['--no-sandbox']});
+ const context=await browser.newContext({viewport:{width:1440,height:900},reducedMotion:'reduce'}),base=process.env.TEST_BASE_URL||'http://127.0.0.1:8765/kuba',qa=process.env.QA_DIR||path.resolve(__dirname,'../../qa');
+ fs.mkdirSync(qa,{recursive:true});const errors=[],missing=[],page=await context.newPage();let checks=0;const check=(v,m)=>{assert(v,m);checks++;};
+ page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.url().startsWith(base)&&r.status()>=400)missing.push(r.url());});
+ await context.route('**/assets/js/vendor/firebase-*-compat.js',r=>r.fulfill({body:'/* SDK deliberately unavailable in smoke test */',contentType:'application/javascript'}));
+ await page.goto(base+'/');await page.waitForFunction(()=>document.getElementById('heroTitle').textContent.length>0);await page.waitForTimeout(700);
+ check(await page.title()==='KubanAdventures — Эко-приключения на Кавказе','Root index loads under repository path');
+ check(await page.locator('#tours-sochi .tour-card').count()===4,'Built-in catalog loads without cloud');
+ check(!(await page.locator('.sync-badge').isVisible()),'Cloud diagnostic not shown to customers');
+ check((await page.locator('link[rel=icon]').getAttribute('href'))==='images/favicon.svg','Relative favicon');
+ await page.screenshot({path:path.join(qa,'gh-public-home.png'),fullPage:true});
+ await page.locator('#authBtn').click();await page.locator('#loginEmail').fill('customer@example.test');await page.locator('#loginPassword').fill('not-a-real-password');await page.locator('#loginForm [type=submit]').click();
+ check((await page.locator('#authMessage').textContent()).includes('Не удалось'),'Missing cloud does not fake successful login');
+ await page.goto(base+'/admin.html');await page.locator('a.auth-secondary[href="setup.html"]').click();await page.waitForURL(base+'/setup.html');
+ check((await page.locator('h1').textContent()).includes('без установки'),'Owner can access setup from login');
+ check(await page.locator('#copyDomain').isDisabled(),'Local preview domain not presented as real GitHub domain');
+ check((await page.locator('#openAuthSettings').getAttribute('href')).includes('/project/kubanadventures/'),'Console link uses supplied project');
+ check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Setup desktop no horizontal overflow');
+ await page.screenshot({path:path.join(qa,'gh-setup-final-desktop.png'),fullPage:true});
+ await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(qa,'gh-setup-final-mobile.png'),fullPage:true});check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Setup mobile no horizontal overflow');
+ await page.locator('header a[href="admin.html"]').click();await page.waitForURL(base+'/admin.html');await page.screenshot({path:path.join(qa,'gh-admin-final-mobile.png'),fullPage:true});check(await page.locator('#authOverlay').isVisible(),'Auth guard preserved under subdirectory');
+ check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Admin mobile no horizontal overflow');
+ check(errors.length===0,'No page errors: '+errors);check(missing.length===0,'No missing repository assets: '+missing);
+ console.log(JSON.stringify({passed:checks,missingResources:missing,pageErrors:errors,realFirebase:'not touched'},null,2));
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1);});

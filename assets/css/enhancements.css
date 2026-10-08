@@ -1,0 +1,79 @@
+/* Общая палитра витрины и панели: глубокий зелёный, тёплая медь, слоновая кость. */
+:root{--kuba-green:#06231a;--kuba-gold:#ebb77a;--kuba-cream:#f9f6f0}
+body{font-family:Arial,Helvetica,sans-serif;background-color:var(--kuba-green)}
+body:not(.noise-bg){color:var(--kuba-cream)}
+button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--kuba-gold)!important;outline-offset:4px}
+button:disabled,input[type=submit]:disabled{opacity:.55;cursor:wait}
+#bg:after{background-image:linear-gradient(180deg,rgba(4,22,17,.30),rgba(4,22,17,.77)),url('../../images/hero.webp');background-position:center;background-size:cover}
+#bg:before{background-image:none;background-color:transparent}
+#header .logo{color:var(--kuba-gold);border-color:rgba(249,246,240,.65);display:flex;align-items:center;justify-content:center}
+#header .inner{max-width:960px!important;padding:2.4rem 2rem!important}
+#header h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;text-transform:none;letter-spacing:-.035em;font-size:clamp(2.2rem,5vw,4.5rem);line-height:1.08;max-width:850px;margin:0 auto 1rem;text-wrap:balance}
+#header .inner>p:not(.eyebrow){text-transform:none;letter-spacing:.03em;font-size:1rem;line-height:1.7}
+.eyebrow{font-size:.75rem!important;letter-spacing:.18em!important;text-transform:uppercase!important;color:var(--kuba-gold);margin:0 0 1rem}
+.brand-caption{font-size:.8rem!important;opacity:.78}
+#header nav ul{flex-wrap:wrap;max-width:1060px;justify-content:center;border:0;gap:8px}
+#header nav ul li{border:1px solid rgba(255,255,255,.32)!important;border-radius:4px!important;background:rgba(6,35,26,.4)}
+#header nav ul li a{font-size:.8rem;letter-spacing:.08em;min-width:auto;padding:0 1.1rem}
+#header nav.use-middle:after{display:none}
+#auth-controls{position:absolute;top:20px;right:24px;left:24px;display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;z-index:10}
+#auth-controls button{margin:0;min-height:44px}
+.user-info{margin-right:8px;max-width:260px;overflow-wrap:anywhere}
+#main article{width:min(900px,calc(100vw - 48px));background:rgba(6,28,22,.97);border:1px solid rgba(235,183,122,.18);border-radius:12px;padding:3rem 2.5rem}
+#main article h2.major{max-width:100%;font-size:clamp(1.4rem,3vw,2rem);letter-spacing:.08em;overflow-wrap:anywhere;width:auto;line-height:1.35}
+.image.main img{height:auto;aspect-ratio:1.8;object-fit:cover;border-radius:8px}
+.tour-card{padding:0;overflow:hidden;border-radius:10px;border-color:rgba(255,255,255,.16);background:#0c2c22;transform:none!important}
+.tour-card:hover{background:#10372a;border-color:rgba(235,183,122,.5)}
+.tour-cover{display:block;width:100%;height:auto;aspect-ratio:2;object-fit:cover}
+.tour-card-body{padding:24px}.tour-card h3{text-transform:none;letter-spacing:0;font-family:Georgia,serif;font-size:1.7rem;font-weight:400;overflow-wrap:anywhere}
+.tour-meta{flex-wrap:wrap;gap:8px 20px!important;line-height:1.5}
+.tour-price{color:var(--kuba-gold)!important;font-size:1.4rem!important;white-space:nowrap}
+.tour-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.tour-actions{display:flex;gap:8px;flex-wrap:wrap}
+button.primary,input.primary,input[type=submit].primary{background:var(--kuba-gold)!important;color:#082319!important;box-shadow:none;font-weight:bold}
+button,.button,input[type=submit]{min-height:44px;font-size:.8rem;letter-spacing:.08em}
+.filter-btn{min-height:44px}.filter-btn.active{background:var(--kuba-gold)!important;color:#082319!important;border-color:var(--kuba-gold)}
+.stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:24px 0}
+.stats-grid>div{padding:20px;border:1px solid rgba(235,183,122,.25);border-radius:8px}
+.stats-grid strong{display:block;color:var(--kuba-gold);font:1.8rem Georgia,serif;margin-bottom:8px}
+.stats-grid span{font-size:.9rem;line-height:1.5}
+.footer-contacts{max-width:850px;margin:0 auto 24px;font-size:.9rem;line-height:1.6}.footer-contacts p{margin:0 0 12px}
+.contact-links{display:flex;gap:12px 24px;flex-wrap:wrap;justify-content:center}.image-note{font-size:.75rem;letter-spacing:0;line-height:1.6;opacity:.7;margin-top:16px!important;text-transform:none}
+.empty-state,.booking-card{padding:24px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.15);border-radius:8px;margin:16px 0}
+.booking-status{color:var(--kuba-gold)}.long-description{white-space:pre-line}
+.form-message.success{color:#b6edc5;background:#163d2a;border-color:#72bc8f}.form-message.error{color:#ffd0c8;background:#4b2320;border-color:#de9255}.form-message.info{color:#e4edf2;background:#15352c;border:1px solid #537569}
+.sync-badge{position:fixed;bottom:12px;left:12px;max-width:min(450px,calc(100vw - 24px));padding:6px 12px;border-radius:6px;background:#0b2c22;color:#eee8dd;border:1px solid #416453;font:12px/1.4 Arial,sans-serif;z-index:1100;pointer-events:none}
+.sync-badge[data-type=live]{opacity:.8}.sync-badge[data-type=error],.sync-badge[data-type=demo]{background:#463419;border-color:#aa8754}
+body.noise-bg{font-family:Arial,Helvetica,sans-serif}.noise-bg header{gap:16px;flex-wrap:wrap}
+.noise-bg .logo{flex-wrap:wrap;gap:8px}.noise-bg .logo span{display:none}
+.noise-bg .admin-container{grid-template-columns:230px minmax(0,1fr);gap:24px}
+.noise-bg .btn-gold{background:#ebb77a;color:#082319;min-height:44px}.noise-bg .btn-gold:hover{background:#f5cfa1}
+.noise-bg .btn-outline,.noise-bg .action-btn{min-height:44px}.noise-bg .action-btn{min-width:44px;color:#ebb77a}.noise-bg .action-btn.delete{color:#ffaea5}
+.noise-bg .card-block h3,.noise-bg th{color:#ebb77a}.noise-bg .form-group label{color:#c9d8cf;font-size:13px}.noise-bg .form-group input,.noise-bg .form-group select{min-height:44px}
+.noise-bg select option{background:#06231a;color:white}.noise-bg .form-group{min-width:0}
+.noise-bg .admin-main{min-width:0}.noise-bg .tour-list-item{padding:16px;gap:16px}.tour-list-thumb{width:100px;height:70px;object-fit:cover;border-radius:6px;flex-shrink:0}.tour-list-copy{flex:1;min-width:0;overflow-wrap:anywhere}.tour-list-copy span{font-size:13px;color:#b7cbbf}
+.admin-image-preview{width:100%;max-width:420px;height:220px;object-fit:cover;border-radius:8px;margin-top:8px}.admin-image-preview[hidden]{display:none}
+.helper{font-size:13px;color:#b7cbbf;line-height:1.6}.publish-status{margin:20px auto 0;width:90%;max-width:1400px;padding:14px 18px;border:1px solid #476454;border-radius:8px;font-size:14px;line-height:1.5}
+.publish-status[data-type=error]{color:#ffd0c8;border-color:#ad6660}.publish-status[data-type=success]{color:#b6edc5}
+.auth-hint{font-size:14px;line-height:1.6;margin-bottom:24px}.auth-card{margin:20px;max-height:calc(100dvh - 40px);overflow:auto}.auth-secondary{display:block;text-align:center;margin-top:12px;color:#173b2a!important;border-color:#6b7d73!important;font-size:14px}
+.noise-bg .status-confirmed{color:#b6edc5}.noise-bg .status-cancelled{color:#ffd0c8}
+@media(max-width:768px){.noise-bg .admin-container{grid-template-columns:1fr}.noise-bg .admin-sidebar{display:flex;gap:8px;padding:12px;overflow:auto}.noise-bg .tab-btn{min-width:150px;margin:0;padding:12px}.noise-bg .card-block{padding:20px}.noise-bg .form-grid{grid-template-columns:1fr}.noise-bg .auth-card{padding:28px 24px}.noise-bg .tour-list-item{flex-wrap:wrap}.tour-list-thumb{width:76px;height:62px}}
+@media(max-width:480px){#wrapper{padding:7rem 16px 3rem}#auth-controls{top:12px;left:16px;right:16px}#auth-controls .user-info{font-size:12px;max-width:180px}#header .inner{padding:2rem 12px!important}#header h1{font-size:2.45rem}#header nav{width:100%}#header nav ul{flex-direction:row!important;gap:8px}#header nav ul li{flex:1 1 42%;min-width:0}#header nav ul li a{font-size:10px;padding:0 4px;letter-spacing:.035em}#main article{width:100%;padding:3.5rem 20px 24px}.tour-card-body{padding:20px}.tour-actions{width:100%}.tour-actions button{flex:1;white-space:normal;line-height:1.4;padding:12px 8px;height:auto}.stats-grid{gap:12px}.stats-grid>div{padding:14px}.stats-grid strong{font-size:1.4rem}.stats-grid span{font-size:.8rem}.sync-badge{font-size:11px}.noise-bg header{padding:16px 5%}.noise-bg .header-actions{width:100%;gap:8px}.noise-bg .tour-actions{width:auto}.noise-bg .tour-list-copy{min-width:150px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+#main article:focus{outline:none}
+#main article .close{box-shadow:none!important;border:0;background:transparent;padding:0;font-size:0;min-width:44px;min-height:44px}
+body.is-article-visible #auth-controls{display:none}
+@media(max-width:480px){#header nav ul li a{font-size:13px;letter-spacing:0}.image-note{font-size:13px}.eyebrow{font-size:13px!important}}
+#auth-controls button{background:rgba(6,35,26,.8);font-size:14px;padding:0 16px;letter-spacing:.04em}
+#auth-controls .user-info{background:rgba(6,35,26,.8);padding:6px 10px;border-radius:4px;color:#f9f6f0}
+button,.button,input[type=submit],.filter-btn{font-size:14px}
+.noise-bg .tab-btn.active,.noise-bg .tab-btn:hover{background:#ebb77a;color:#082319}
+/* Индикатор соединения не закрывает поля или подписи в открытых разделах. */
+body.is-article-visible .sync-badge,body.noise-bg .sync-badge{position:relative;left:auto;bottom:auto;margin:12px 5%;width:fit-content;font-size:13px}
+@media(max-width:480px){.sync-badge{position:relative;left:auto;bottom:auto;margin:12px 16px;width:fit-content;font-size:13px}#header nav ul li a{font-size:14px}#auth-controls button{padding:0 12px}}
+#main input[type=text],#main input[type=email],#main input[type=password],#main input[type=tel]{min-height:44px}
+body.noise-bg:has(#authOverlay:not([style*="none"])) .sync-badge{display:none}
+
+/* Техническую диагностику показываем владельцу, не клиентам витрины. */
+body:not(.noise-bg) .sync-badge:not([data-type=demo]){display:none}
