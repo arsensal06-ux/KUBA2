@@ -1,0 +1,11 @@
+node_modules/
+_site/
+qa/
+*.log
+*.zip
+.DS_Store
+Thumbs.db
+.env
+.env.*
+*service-account*.json
+*serviceAccount*.json

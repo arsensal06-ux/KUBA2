@@ -1,0 +1,1060 @@
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                /* ============================================================
+   NEW CODE START — НОВЫЙ ФАЙЛ: legal-pages.css
+   Стили правовых страниц KubanAdventures.
+   Только новый код; существующие стили сайта не затрагиваются.
+   ============================================================ */
+
+.kb-legal-header,
+.kb-legal-hero,
+.kb-legal-layout,
+.kb-legal-footer-page,
+.kb-legal-content,
+.kb-legal-toc {
+  --kb-bg: #0b1a11;
+  --kb-bg-soft: #0f2216;
+  --kb-panel: #13291b;
+  --kb-gold: #d9a94f;
+  --kb-gold-soft: #f0cf8a;
+  --kb-text: #efe9da;
+  --kb-muted: #b4c0ab;
+  --kb-line: rgba(217, 169, 79, 0.22);
+}
+
+html { scroll-behavior: smooth; }
+
+body.kb-legal-body,
+body:has(.kb-legal-header) {
+  margin: 0;
+  background:
+    radial-gradient(1100px 520px at 85% -10%, rgba(217, 169, 79, 0.09), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(46, 110, 74, 0.14), transparent 55%),
+    #0b1a11;
+  color: #efe9da;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+/* ---------- Шапка ---------- */
+.kb-legal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--kb-line);
+  background: rgba(11, 26, 17, 0.85);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+}
+
+.kb-brand {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--kb-text);
+  text-decoration: none;
+}
+.kb-brand span { color: var(--kb-gold); }
+
+.kb-back {
+  color: var(--kb-gold-soft);
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 14px;
+  border: 1px solid var(--kb-line);
+  border-radius: 999px;
+  transition: background 0.25s ease, border-color 0.25s ease;
+  white-space: nowrap;
+}
+.kb-back:hover { background: rgba(217, 169, 79, 0.12); border-color: var(--kb-gold); }
+
+/* ---------- Заголовочный блок ---------- */
+.kb-legal-hero { padding: 56px 24px 28px; text-align: center; }
+
+.kb-kicker {
+  margin: 0 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  color: var(--kb-gold);
+  font-weight: 700;
+}
+
+.kb-legal-hero h1 {
+  margin: 0 auto 18px;
+  max-width: 820px;
+  font-size: clamp(28px, 5vw, 46px);
+  line-height: 1.15;
+  font-weight: 800;
+}
+
+.kb-legal-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px 22px;
+  color: var(--kb-muted);
+  font-size: 14px;
+}
+
+.kb-print-btn {
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  color: var(--kb-gold-soft);
+  background: transparent;
+  border: 1px solid var(--kb-line);
+  border-radius: 999px;
+  padding: 8px 16px;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+.kb-print-btn:hover { background: rgba(217, 169, 79, 0.12); transform: translateY(-1px); }
+
+/* ---------- Сетка: содержание + текст ---------- */
+.kb-legal-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 36px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+  align-items: start;
+}
+
+.kb-legal-toc {
+  position: sticky;
+  top: 84px;
+  background: var(--kb-panel);
+  border: 1px solid var(--kb-line);
+  border-radius: 14px;
+  padding: 20px 22px;
+  max-height: calc(100vh - 110px);
+  overflow: auto;
+}
+
+.kb-toc-title {
+  margin: 0 0 10px;
+  font-weight: 700;
+  color: var(--kb-gold);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: 12px;
+}
+
+.kb-legal-toc ol { margin: 0; padding-left: 18px; }
+.kb-legal-toc li { margin: 7px 0; font-size: 13.5px; }
+.kb-legal-toc a { color: var(--kb-muted); text-decoration: none; transition: color 0.2s ease; }
+.kb-legal-toc a:hover { color: var(--kb-gold-soft); }
+
+/* ---------- Контент ---------- */
+.kb-legal-content section {
+  margin-bottom: 34px;
+  padding: 24px 26px;
+  background: rgba(19, 41, 27, 0.55);
+  border: 1px solid rgba(217, 169, 79, 0.12);
+  border-radius: 14px;
+  scroll-margin-top: 90px;
+}
+
+.kb-legal-content h2 {
+  margin: 0 0 14px;
+  font-size: clamp(18px, 2.6vw, 22px);
+  line-height: 1.35;
+}
+.kb-num { color: var(--kb-gold); margin-right: 8px; }
+
+.kb-legal-content p { margin: 10px 0; color: #ded8c6; }
+.kb-legal-content ul { margin: 10px 0; padding-left: 22px; color: #ded8c6; }
+.kb-legal-content li { margin: 7px 0; }
+.kb-legal-content a { color: var(--kb-gold-soft); }
+
+.kb-card {
+  margin-top: 12px;
+  padding: 16px 18px;
+  background: rgba(217, 169, 79, 0.06);
+  border: 1px solid var(--kb-line);
+  border-radius: 10px;
+}
+
+/* Плейсхолдеры для заполнения владельцем сайта */
+.kb-fill {
+  background: rgba(217, 169, 79, 0.14);
+  border: 1px dashed var(--kb-gold);
+  border-radius: 6px;
+  padding: 1px 7px;
+  color: var(--kb-gold-soft);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Подвал правовой страницы ---------- */
+.kb-legal-footer-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 26px;
+  padding: 22px 24px 34px;
+  border-top: 1px solid var(--kb-line);
+  color: var(--kb-muted);
+  font-size: 13.5px;
+}
+.kb-legal-footer-page a { color: var(--kb-gold-soft); text-decoration: none; }
+.kb-legal-footer-page a:hover { text-decoration: underline; }
+
+/* ---------- Адаптивность ---------- */
+@media (max-width: 860px) {
+  .kb-legal-layout { grid-template-columns: 1fr; gap: 22px; }
+  .kb-legal-toc { position: static; max-height: none; }
+}
+
+@media (max-width: 520px) {
+  .kb-legal-header { flex-direction: row; padding: 14px 16px; }
+  .kb-legal-hero { padding: 40px 16px 20px; }
+  .kb-legal-layout { padding: 20px 14px 48px; }
+  .kb-legal-content section { padding: 18px 16px; }
+  .kb-fill { white-space: normal; }
+}
+
+/* ---------- Печать ---------- */
+@media print {
+  body, body:has(.kb-legal-header) { background: #fff !important; color: #111 !important; }
+  .kb-legal-header, .kb-print-btn, .kb-legal-footer-page { display: none !important; }
+  .kb-legal-content section { background: #fff; border-color: #ccc; }
+  .kb-legal-content p, .kb-legal-content ul, .kb-legal-content li { color: #111; }
+  .kb-fill { background: #fff3d6; color: #7a5a12; }
+  .kb-legal-toc { display: none; }
+  .kb-legal-layout { display: block; }
+}
+/* ============================================================
+   NEW CODE END — legal-pages.css
+   ============================================================ */
+
+/* ============================================================
+   NEW CODE START — НОВЫЙ ФАЙЛ: cookie-banner.css
+   Стили cookie-баннера, блока правовых ссылок и чекбоксов
+   согласия в формах. Используется на index.html и admin.html.
+   Все классы имеют префикс kb- и не конфликтуют со старым кодом.
+   ============================================================ */
+
+#kb-cookie-banner,
+.kb-legal-footer,
+.kb-consent {
+  --kb-gold: #d9a94f;
+  --kb-gold-soft: #f0cf8a;
+  --kb-panel: #0f2317;
+  --kb-ink: #16281b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ================= COOKIE BANNER ================= */
+#kb-cookie-banner {
+  display: none;
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  margin: 0 auto;
+  max-width: 1080px;
+  z-index: 9999999;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 22px;
+  background: rgba(15, 35, 23, 0.97);
+  color: #f1ece0;
+  border: 1px solid rgba(217, 169, 79, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#kb-cookie-banner.kb-visible {
+  display: flex;
+  animation: kb-banner-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#kb-cookie-banner.kb-leaving {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+@keyframes kb-banner-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.kb-banner-icon { font-size: 30px; line-height: 1; flex: 0 0 auto; }
+
+.kb-banner-text { flex: 1 1 auto; min-width: 0; }
+.kb-banner-text strong { display: block; font-size: 16px; margin-bottom: 4px; color: var(--kb-gold-soft); }
+.kb-banner-text p { margin: 0; font-size: 13.5px; line-height: 1.55; color: #d9d3c2; }
+.kb-banner-text a { color: var(--kb-gold); text-decoration: underline; }
+.kb-banner-text a:hover { color: var(--kb-gold-soft); }
+
+.kb-banner-actions { display: flex; gap: 10px; flex: 0 0 auto; }
+
+.kb-btn {
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+.kb-btn:focus-visible { outline: 2px solid var(--kb-gold-soft); outline-offset: 2px; }
+
+.kb-btn-accept { background: var(--kb-gold); color: var(--kb-ink); }
+.kb-btn-accept:hover { background: var(--kb-gold-soft); transform: translateY(-1px); }
+
+.kb-btn-decline { background: transparent; color: #e8e1d0; border-color: rgba(232, 225, 208, 0.45); }
+.kb-btn-decline:hover { border-color: var(--kb-gold-soft); color: var(--kb-gold-soft); transform: translateY(-1px); }
+
+/* ============ ПРАВОВЫЕ ССЫЛКИ (новый блок после футера) ============ */
+.kb-legal-footer {
+  background: #0a150e;
+  border-top: 1px solid rgba(217, 169, 79, 0.25);
+  padding: 16px 20px;
+}
+
+.kb-legal-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px 18px;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-size: 13.5px;
+}
+
+.kb-legal-footer a {
+  color: #e8dfc9;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.kb-legal-footer a:hover { color: var(--kb-gold); border-bottom-color: var(--kb-gold); }
+.kb-legal-sep { color: rgba(217, 169, 79, 0.5); user-select: none; }
+
+/* ============ ЧЕКБОКС СОГЛАСИЯ В ФОРМАХ ============ */
+.kb-consent { margin: 14px 0 4px; text-align: left; }
+
+.kb-consent-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1.5;
+  color: inherit;
+}
+
+.kb-consent-input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.kb-consent-box {
+  flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
+  margin-top: 1px;
+  border: 2px solid var(--kb-gold);
+  border-radius: 5px;
+  background: transparent;
+  position: relative;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.kb-consent-input:checked + .kb-consent-box { background: var(--kb-gold); }
+
+.kb-consent-input:checked + .kb-consent-box::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid var(--kb-ink);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.kb-consent-input:focus-visible + .kb-consent-box {
+  outline: 2px solid var(--kb-gold-soft);
+  outline-offset: 2px;
+}
+
+.kb-consent-text a { color: var(--kb-gold); text-decoration: underline; }
+.kb-consent-text a:hover { color: var(--kb-gold-soft); }
+
+.kb-consent-error {
+  margin: 8px 0 0;
+  color: #ff9d8d;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.kb-consent-invalid .kb-consent-box { border-color: #ff8b7a; }
+.kb-consent-invalid .kb-consent-text { color: #ffb3a7; }
+
+/* ================= АДАПТИВНОСТЬ ================= */
+@media (max-width: 640px) {
+  #kb-cookie-banner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    padding: 16px;
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  .kb-banner-icon { display: none; }
+  .kb-banner-actions { flex-direction: column; }
+  .kb-btn { width: 100%; }
+}
+
+/* Пользователи с ограничением анимаций */
+@media (prefers-reduced-motion: reduce) {
+  #kb-cookie-banner, #kb-cookie-banner.kb-visible { animation: none; transition: none; }
+}
+/* ============================================================
+   NEW CODE END — cookie-banner.css
+   ============================================================ */
+
+
+              </style>
+                        </head>
+                        <body>
+                            <!-- ============================================================
+     НОВЫЙ ФАЙЛ: privacy-policy.html
+     Политика конфиденциальности KubanAdventures (соответствие 152-ФЗ)
+     ⚠️ ОБЯЗАТЕЛЬНО замените все плейсхолдеры вида [ ... ] на реальные
+        данные оператора (наименование, ИНН/ОГРН, адрес, e-mail, телефон)
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Политика конфиденциальности — KubanAdventures</title>
+<meta name="description" content="Политика конфиденциальности и обработки персональных данных сайта KubanAdventures в соответствии с Федеральным законом № 152-ФЗ «О персональных данных».">
+<link rel="stylesheet" href="legal-pages.css">
+</head>
+<body>
+
+<header class="kb-legal-header">
+  <a class="kb-brand" href="index.html">Kuban<span>Adventures</span></a>
+  <a class="kb-back" href="index.html">← Вернуться на сайт</a>
+</header>
+
+<section class="kb-legal-hero">
+  <p class="kb-kicker">Правовой документ</p>
+  <h1>Политика конфиденциальности</h1>
+  <div class="kb-legal-meta">
+    <span>Составлена в соответствии с Федеральным законом № 152-ФЗ «О персональных данных»</span>
+    <span>Дата вступления в силу: <b class="kb-fill">[укажите дату]</b></span>
+    <button type="button" class="kb-print-btn" id="kb-print-btn">🖨 Версия для печати</button>
+  </div>
+</section>
+
+<div class="kb-legal-layout">
+
+  <nav class="kb-legal-toc" aria-label="Содержание документа">
+    <p class="kb-toc-title">Содержание</p>
+    <ol>
+      <li><a href="#s1">Общие положения</a></li>
+      <li><a href="#s2">Основные понятия</a></li>
+      <li><a href="#s3">Сведения об операторе</a></li>
+      <li><a href="#s4">Какие данные мы собираем</a></li>
+      <li><a href="#s5">Цели обработки данных</a></li>
+      <li><a href="#s6">Правовые основания обработки</a></li>
+      <li><a href="#s7">Порядок и сроки обработки и хранения</a></li>
+      <li><a href="#s8">Передача данных третьим лицам</a></li>
+      <li><a href="#s9">Права пользователя</a></li>
+      <li><a href="#s10">Отзыв согласия и удаление данных</a></li>
+      <li><a href="#s11">Файлы cookie</a></li>
+      <li><a href="#s12">Меры защиты данных</a></li>
+      <li><a href="#s13">Данные несовершеннолетних</a></li>
+      <li><a href="#s14">Заключительные положения</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ol>
+  </nav>
+
+  <main class="kb-legal-content">
+
+    <section id="s1">
+      <h2><span class="kb-num">1.</span> Общие положения</h2>
+      <p>1.1. Настоящая Политика конфиденциальности (далее — «Политика») определяет порядок обработки и защиты персональных данных пользователей сайта KubanAdventures, размещённого по адресу <a href="https://arsensal06-ux.github.io/KUBA/">https://arsensal06-ux.github.io/KUBA/</a> (далее — «Сайт»), и составлена в соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных» (далее — 152-ФЗ).</p>
+      <p>1.2. Используя Сайт, в том числе регистрируя учётную запись, оставляя заявки или бронируя туры, пользователь выражает согласие на обработку персональных данных на условиях настоящей Политики.</p>
+      <p>1.3. Если пользователь не согласен с условиями Политики, ему следует прекратить использование Сайта.</p>
+      <p>1.4. Действующая редакция Политики всегда доступна на данной странице.</p>
+    </section>
+
+    <section id="s2">
+      <h2><span class="kb-num">2.</span> Основные понятия</h2>
+      <ul>
+        <li><b>Персональные данные</b> — любая информация, относящаяся прямо или косвенно к определённому или определяемому физическому лицу (субъекту персональных данных).</li>
+        <li><b>Обработка персональных данных</b> — любое действие (операция) или совокупность действий, совершаемых с персональными данными, включая сбор, запись, систематизацию, накопление, хранение, уточнение, извлечение, использование, передачу, обезличивание, блокирование, уничтожение.</li>
+        <li><b>Оператор</b> — лицо, самостоятельно или совместно с другими лицами организующее и (или) осуществляющее обработку персональных данных.</li>
+        <li><b>Пользователь</b> — любой посетитель Сайта.</li>
+        <li><b>Cookie</b> — небольшой фрагмент данных, отправляемый веб-сервером и сохраняемый на устройстве пользователя.</li>
+      </ul>
+    </section>
+
+    <section id="s3">
+      <h2><span class="kb-num">3.</span> Сведения об операторе персональных данных</h2>
+      <div class="kb-card">
+        <p><b>Наименование:</b> <span class="kb-fill">[Полное наименование организации / ФИО ИП]</span></p>
+        <p><b>ОГРН / ОГРНИП:</b> <span class="kb-fill">[укажите номер]</span></p>
+        <p><b>ИНН:</b> <span class="kb-fill">[укажите номер]</span></p>
+        <p><b>Юридический адрес:</b> <span class="kb-fill">[укажите адрес]</span></p>
+        <p><b>E-mail для запросов по персональным данным:</b> <span class="kb-fill">[укажите e-mail]</span></p>
+      </div>
+    </section>
+
+    <section id="s4">
+      <h2><span class="kb-num">4.</span> Какие персональные данные мы собираем</h2>
+      <p>4.1. При регистрации учётной записи на Сайте: <b>имя, адрес электронной почты, пароль</b> (пароль хранится в обезличенном виде).</p>
+      <p>4.2. При оформлении заявок и бронировании туров: <b>имя, номер телефона, адрес электронной почты</b>, выбранный тур и дата, а также иные данные, добровольно указанные пользователем в заявке.</p>
+      <p>4.3. Автоматически при использовании Сайта: IP-адрес, файлы cookie, сведения о браузере и устройстве, время доступа, адреса посещённых страниц.</p>
+      <p>4.4. Оператор <b>не обрабатывает</b> специальные категории персональных данных (о состоянии здоровья, национальности, вероисповедании и т. п.) и биометрические персональные данные.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="kb-num">5.</span> Цели обработки персональных данных</h2>
+      <ul>
+        <li>регистрация и обслуживание учётной записи пользователя;</li>
+        <li>приём и обработка заявок, бронирование туров, исполнение договоров с пользователем;</li>
+        <li>связь с пользователем по вопросам заявок, бронирований и работы Сайта;</li>
+        <li>улучшение качества работы Сайта и оказываемых услуг;</li>
+        <li>обеспечение безопасности и корректного функционирования Сайта;</li>
+        <li>исполнение обязанностей, возложенных законодательством Российской Федерации.</li>
+      </ul>
+    </section>
+
+    <section id="s6">
+      <h2><span class="kb-num">6.</span> Правовые основания обработки</h2>
+      <p>6.1. Обработка осуществляется на основании <b>согласия субъекта персональных данных</b> (п. 1 ч. 1 ст. 6 152-ФЗ). Согласие предоставляется пользователем путём установки отметки в чекбоксе «Я согласен(а) на обработку персональных данных» при заполнении форм на Сайте.</p>
+      <p>6.2. Обработка, необходимая для исполнения договора, стороной которого является пользователь (п. 5 ч. 1 ст. 6 152-ФЗ).</p>
+      <p>6.3. Обработка, необходимая для исполнения обязанностей, возложенных законодательством РФ (п. 2 ч. 1 ст. 6 152-ФЗ).</p>
+    </section>
+
+    <section id="s7">
+      <h2><span class="kb-num">7.</span> Порядок и сроки обработки и хранения данных</h2>
+      <p>7.1. Обработка персональных данных осуществляется как с использованием средств автоматизации, так и без них.</p>
+      <p>7.2. Данные хранятся не дольше, чем этого требуют цели обработки:</p>
+      <ul>
+        <li>данные учётной записи — до момента удаления аккаунта пользователем либо отзыва согласия;</li>
+        <li>данные заявок и бронирований — в течение 3 (трёх) лет после исполнения обязательств по договору (срок исковой давности, ст. 196 ГК РФ) либо до отзыва согласия;</li>
+        <li>файлы cookie и автоматически собираемые технические данные — не более 12 месяцев.</li>
+      </ul>
+      <p>7.3. По достижении целей обработки либо при отзыве согласия данные подлежат уничтожению или обезличиванию в срок не более 30 дней, если иное не предусмотрено законодательством РФ.</p>
+    </section>
+
+    <section id="s8">
+      <h2><span class="kb-num">8.</span> Передача персональных данных третьим лицам</h2>
+      <p>8.1. Оператор не продаёт и не передаёт персональные данные пользователей третьим лицам в целях, не указанных в настоящей Политике.</p>
+      <p>8.2. Передача возможна: лицам, действующим по поручению Оператора на основании договора (хостинг-провайдеры, сервисы приёма платежей) при соблюдении требований 152-ФЗ; уполномоченным государственным органам в случаях и порядке, прямо предусмотренных законодательством РФ.</p>
+    </section>
+
+    <section id="s9">
+      <h2><span class="kb-num">9.</span> Права пользователя (субъекта персональных данных)</h2>
+      <p>В соответствии со ст. 14–21 152-ФЗ пользователь вправе:</p>
+      <ul>
+        <li>получать сведения об обработке своих персональных данных;</li>
+        <li>требовать уточнения (обновления, изменения) данных, если они неполные, устаревшие или неточные;</li>
+        <li>требовать блокирования или уничтожения данных, обрабатываемых незаконно;</li>
+        <li>отозвать ранее данное согласие на обработку;</li>
+        <li>требовать ограничения обработки данных;</li>
+        <li>обжаловать действия или бездействие Оператора в уполномоченный орган по защите прав субъектов персональных данных (Роскомнадзор) или в судебном порядке.</li>
+      </ul>
+    </section>
+
+    <section id="s10">
+      <h2><span class="kb-num">10.</span> Отзыв согласия и удаление данных</h2>
+      <p>10.1. Пользователь может в любой момент отозвать согласие на обработку персональных данных, направив заявление на e-mail Оператора: <span class="kb-fill">[укажите e-mail]</span> с пометкой «Отзыв согласия на обработку персональных данных».</p>
+      <p>10.2. Оператор рассматривает обращение в сроки, установленные 152-ФЗ, и прекращает обработку либо обеспечивает уничтожение данных, за исключением случаев, когда обработка продолжается по иным законным основаниям.</p>
+      <p>10.3. Удаление учётной записи в личном кабинете также прекращает обработку данных аккаунта.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="kb-num">11.</span> Файлы cookie</h2>
+      <p>11.1. Сайт использует файлы cookie для обеспечения корректной работы, сохранения пользовательских выборов (например, выбор в баннере cookie) и анализа посещаемости.</p>
+      <p>11.2. При первом посещении Сайт показывает баннер с предложением принять или отклонить использование cookie. Сделанный выбор сохраняется на устройстве пользователя.</p>
+      <p>11.3. Пользователь может ограничить или отключить cookie в настройках браузера; при этом отдельные функции Сайта могут работать некорректно.</p>
+    </section>
+
+    <section id="s12">
+      <h2><span class="kb-num">12.</span> Меры защиты персональных данных</h2>
+      <p>В соответствии со ст. 18.1 и 19 152-ФЗ Оператор принимает необходимые и достаточные организационные и технические меры защиты данных, в том числе: ограничение круга лиц, имеющих доступ к данным; использование защищённого соединения при передаче данных; назначение лица, ответственного за организацию обработки персональных данных; реагирование на инциденты безопасности.</p>
+    </section>
+
+    <section id="s13">
+      <h2><span class="kb-num">13.</span> Персональные данные несовершеннолетних</h2>
+      <p>13.1. Сайт не предназначен для лиц моложе 14 лет. Регистрация и оформление заявок несовершеннолетними осуществляются только с согласия их законных представителей.</p>
+      <p>13.2. Если Оператору станет известно об обработке данных несовершеннолетнего без согласия законного представителя, такие данные будут удалены.</p>
+    </section>
+
+    <section id="s14">
+      <h2><span class="kb-num">14.</span> Заключительные положения</h2>
+      <p>14.1. Оператор вправе вносить изменения в настоящую Политику. Новая редакция вступает в силу с момента её публикации на данной странице, если иное не указано в тексте.</p>
+      <p>14.2. Во всём, что не урегулировано настоящей Политикой, применяется законодательство Российской Федерации.</p>
+      <p>14.3. Продолжая использовать Сайт после внесения изменений, пользователь считается принявшим новую редакцию Политики.</p>
+    </section>
+
+    <section id="contacts">
+      <h2><span class="kb-num">15.</span> Контакты для связи по вопросам персональных данных</h2>
+      <div class="kb-card">
+        <p>По всем вопросам, связанным с обработкой персональных данных, реализацией своих прав и отзывом согласия, вы можете обратиться к Оператору:</p>
+        <p><b>E-mail:</b> <span class="kb-fill">[укажите e-mail]</span></p>
+        <p><b>Телефон:</b> <span class="kb-fill">[укажите телефон]</span></p>
+        <p><b>Почтовый адрес:</b> <span class="kb-fill">[укажите адрес]</span></p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="kb-legal-footer-page">
+  <a href="index.html">Главная</a>
+  <a href="terms-of-use.html">Пользовательское соглашение</a>
+  <span>© KubanAdventures</span>
+</footer>
+
+<!-- NEW CODE START: служебный скрипт страницы -->
+<script>
+(function () {
+  'use strict';
+  var printBtn = document.getElementById('kb-print-btn');
+  if (printBtn) {
+    printBtn.addEventListener('click', function () { window.print(); });
+  }
+})();
+</script>
+<!-- NEW CODE END -->
+
+</body>
+</html>
+<!-- ============================================================
+     НОВЫЙ ФАЙЛ: terms-of-use.html
+     Пользовательское соглашение KubanAdventures
+     ⚠️ Замените плейсхолдеры [ ... ] на реальные данные оператора
+     ============================================================ -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пользовательское соглашение — KubanAdventures</title>
+<meta name="description" content="Пользовательское соглашение сайта KubanAdventures: условия использования, бронирование туров, ответственность сторон.">
+<link rel="stylesheet" href="legal-pages.css">
+</head>
+<body>
+
+<header class="kb-legal-header">
+  <a class="kb-brand" href="index.html">Kuban<span>Adventures</span></a>
+  <a class="kb-back" href="index.html">← Вернуться на сайт</a>
+</header>
+
+<section class="kb-legal-hero">
+  <p class="kb-kicker">Правовой документ</p>
+  <h1>Пользовательское соглашение</h1>
+  <div class="kb-legal-meta">
+    <span>Условия использования сайта KubanAdventures</span>
+    <span>Дата вступления в силу: <b class="kb-fill">[укажите дату]</b></span>
+    <button type="button" class="kb-print-btn" id="kb-print-btn">🖨 Версия для печати</button>
+  </div>
+</section>
+
+<div class="kb-legal-layout">
+
+  <nav class="kb-legal-toc" aria-label="Содержание документа">
+    <p class="kb-toc-title">Содержание</p>
+    <ol>
+      <li><a href="#t1">Общие положения</a></li>
+      <li><a href="#t2">Предмет соглашения</a></li>
+      <li><a href="#t3">Условия использования сайта</a></li>
+      <li><a href="#t4">Регистрация и учётная запись</a></li>
+      <li><a href="#t5">Бронирование туров</a></li>
+      <li><a href="#t6">Обязанности пользователя</a></li>
+      <li><a href="#t7">Ответственность и её ограничение</a></li>
+      <li><a href="#t8">Интеллектуальная собственность</a></li>
+      <li><a href="#t9">Разрешение споров</a></li>
+      <li><a href="#t10">Персональные данные</a></li>
+      <li><a href="#t11">Заключительные положения</a></li>
+      <li><a href="#t-contacts">Реквизиты оператора</a></li>
+    </ol>
+  </nav>
+
+  <main class="kb-legal-content">
+
+    <section id="t1">
+      <h2><span class="kb-num">1.</span> Общие положения</h2>
+      <p>1.1. Настоящее Пользовательское соглашение (далее — «Соглашение») регулирует отношения между <span class="kb-fill">[наименование оператора]</span> (далее — «Оператор») и пользователем сети Интернет (далее — «Пользователь»), возникающие при использовании сайта KubanAdventures по адресу <a href="https://arsensal06-ux.github.io/KUBA/">https://arsensal06-ux.github.io/KUBA/</a>.</p>
+      <p>1.2. Начиная использовать Сайт, Пользователь считается принявшим настоящее Соглашение в полном объёме без каких-либо оговорок. Если Пользователь не согласен с условиями Соглашения, он должен прекратить использование Сайта.</p>
+    </section>
+
+    <section id="t2">
+      <h2><span class="kb-num">2.</span> Предмет соглашения</h2>
+      <p>2.1. Оператор предоставляет Пользователю доступ к информации об экскурсионных и экспедиционных турах по Краснодарскому краю, личному кабинету и сервису подачи заявок на бронирование.</p>
+      <p>2.2. Информация о турах, размещённая на Сайте, носит справочный характер и не является публичной офертой, если иное прямо не указано Оператором. Подтверждение заявки Оператором является акцептом и моментом заключения договора на оказание услуг.</p>
+    </section>
+
+    <section id="t3">
+      <h2><span class="kb-num">3.</span> Условия использования сайта</h2>
+      <p>3.1. Сайт предоставляется в состоянии «как есть» («as is»). Оператор вправе по своему усмотрению изменять функциональность Сайта, приостанавливать или прекращать его работу.</p>
+      <p>3.2. Пользователю запрещается: нарушать работу Сайта, пытаться получить несанкционированный доступ к чужим данным, загружать вредоносное ПО, использовать автоматизированные средства сбора данных без согласия Оператора, размещать недостоверную информацию при подаче заявок.</p>
+    </section>
+
+    <section id="t4">
+      <h2><span class="kb-num">4.</span> Регистрация и учётная запись</h2>
+      <p>4.1. Для регистрации Пользователь указывает имя, адрес электронной почты и пароль (не менее 6 символов). Пользователь обязуется предоставлять достоверные данные.</p>
+      <p>4.2. Пользователь несёт ответственность за сохранность своих учётных данных и все действия, совершённые под его учётной записью.</p>
+      <p>4.3. Оператор вправе заблокировать или удалить учётную запись в случае нарушения условий настоящего Соглашения.</p>
+    </section>
+
+    <section id="t5">
+      <h2><span class="kb-num">5.</span> Бронирование туров</h2>
+      <p>5.1. Подача заявки на тур осуществляется через формы Сайта. Фактическая возможность оказания услуги, точная стоимость и даты подтверждаются Оператором индивидуально.</p>
+      <p>5.2. Цены на Сайте указаны в рублях и могут быть изменены Оператором до момента подтверждения заявки.</p>
+      <p>5.3. Экспедиционные туры связаны с пребыванием в природной среде. Пользователь обязуется соблюдать требования инструкторов и правила безопасности, сообщать о медицинских противопоказаниях к участию в туре.</p>
+      <p>5.4. Перенос или отмена тура по погодным условиям либо по обстоятельствам непреодолимой силы не являются нарушением обязательств Оператора; в этом случае сторонам предлагается перенос даты или возврат средств в порядке, согласованном сторонами.</p>
+    </section>
+
+    <section id="t6">
+      <h2><span class="kb-num">6.</span> Обязанности пользователя</h2>
+      <ul>
+        <li>соблюдать законодательство Российской Федерации и настоящее Соглашение;</li>
+        <li>предоставлять достоверные данные при регистрации и подаче заявок;</li>
+        <li>не нарушать права третьих лиц и нормальное функционирование Сайта;</li>
+        <li>самостоятельно оценивать соответствие своего состояния здоровья выбранному туру.</li>
+      </ul>
+    </section>
+
+    <section id="t7">
+      <h2><span class="kb-num">7.</span> Ответственность и её ограничение</h2>
+      <p>7.1. Оператор не несёт ответственности за временные перерывы в работе Сайта, вызванные техническими причинами, действиями третьих лиц или обстоятельствами непреодолимой силы.</p>
+      <p>7.2. Оператор не отвечает за содержание ресурсов третьих лиц, на которые могут вести ссылки с Сайта.</p>
+      <p>7.3. Участие в турах осуществляется Пользователем на собственный риск в пределах, установленных законодательством РФ. Оператор обеспечивает надлежащую организацию туров и безопасность в разумных пределах, включая привлечение сертифицированных инструкторов.</p>
+    </section>
+
+    <section id="t8">
+      <h2><span class="kb-num">8.</span> Интеллектуальная собственность</h2>
+      <p>8.1. Все объекты, размещённые на Сайте (тексты, графика, логотипы, фото- и видеоматериалы), являются объектами интеллектуальных прав Оператора или используются им на законных основаниях.</p>
+      <p>8.2. Использование материалов Сайта без письменного согласия Оператора не допускается, за исключением случаев, прямо разрешённых законодательством РФ.</p>
+    </section>
+
+    <section id="t9">
+      <h2><span class="kb-num">9.</span> Разрешение споров</h2>
+      <p>9.1. Все споры разрешаются путём переговоров. Претензионный порядок является обязательным: срок ответа на претензию — 30 (тридцать) календарных дней с момента её получения.</p>
+      <p>9.2. При недостижении согласия спор передаётся на рассмотрение суда в соответствии с законодательством Российской Федерации.</p>
+    </section>
+
+    <section id="t10">
+      <h2><span class="kb-num">10.</span> Персональные данные</h2>
+      <p>10.1. Обработка персональных данных Пользователя осуществляется в соответствии с <a href="privacy-policy.html">Политикой конфиденциальности</a>, являющейся неотъемлемой частью настоящего Соглашения.</p>
+      <p>10.2. Заполняя формы на Сайте и отмечая чекбокс согласия, Пользователь даёт согласие на обработку указанных им персональных данных в целях исполнения настоящего Соглашения.</p>
+    </section>
+
+    <section id="t11">
+      <h2><span class="kb-num">11.</span> Заключительные положения</h2>
+      <p>11.1. Оператор вправе в одностороннем порядке изменять условия Соглашения. Новая редакция действует с момента публикации на Сайте.</p>
+      <p>11.2. Недействительность отдельных положений Соглашения не влечёт недействительности остальных положений.</p>
+      <p>11.3. К отношениям сторон применяется право Российской Федерации.</p>
+    </section>
+
+    <section id="t-contacts">
+      <h2><span class="kb-num">12.</span> Реквизиты и контакты оператора</h2>
+      <div class="kb-card">
+        <p><b>Наименование:</b> <span class="kb-fill">[Полное наименование организации / ФИО ИП]</span></p>
+        <p><b>ИНН:</b> <span class="kb-fill">[укажите номер]</span></p>
+        <p><b>Адрес:</b> <span class="kb-fill">[укажите адрес]</span></p>
+        <p><b>E-mail:</b> <span class="kb-fill">[укажите e-mail]</span></p>
+        <p><b>Телефон:</b> <span class="kb-fill">[укажите телефон]</span></p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="kb-legal-footer-page">
+  <a href="index.html">Главная</a>
+  <a href="privacy-policy.html">Политика конфиденциальности</a>
+  <span>© KubanAdventures</span>
+</footer>
+
+<!-- NEW CODE START: служебный скрипт страницы -->
+<script>
+(function () {
+  'use strict';
+  var printBtn = document.getElementById('kb-print-btn');
+  if (printBtn) {
+    printBtn.addEventListener('click', function () { window.print(); });
+  }
+})();
+</script>
+<!-- NEW CODE END -->
+
+</body>
+</html>
+<!-- ============================================================
+     NEW CODE START — Юридический модуль KubanAdventures.
+     ВСТАВЛЕНО ПЕРЕД </body>. Существующий код НЕ изменялся.
+     Состоит из: подключение cookie-banner.css, cookie-баннер,
+     блок правовых ссылок, подключение privacy.js
+     ============================================================ -->
+<link rel="stylesheet" href="cookie-banner.css">
+
+<!-- Cookie-баннер (показывается только при первом посещении — управляет privacy.js) -->
+<div id="kb-cookie-banner" role="dialog" aria-live="polite" aria-label="Уведомление об использовании файлов cookie">
+  <div class="kb-banner-icon" aria-hidden="true">🍪</div>
+  <div class="kb-banner-text">
+    <strong>Мы используем файлы cookie</strong>
+    <p>Сайт KubanAdventures использует cookie для корректной работы и улучшения сервиса. Вы можете принять их или отказаться. Подробнее — в <a href="privacy-policy.html">Политике конфиденциальности</a>.</p>
+  </div>
+  <div class="kb-banner-actions">
+    <button type="button" id="kb-cookie-accept" class="kb-btn kb-btn-accept">Принять</button>
+    <button type="button" id="kb-cookie-decline" class="kb-btn kb-btn-decline">Отказаться</button>
+  </div>
+</div>
+
+<!-- Правовые ссылки (новый блок, добавлен после существующего футера) -->
+<div class="kb-legal-footer">
+  <div class="kb-legal-footer-inner">
+    <a href="privacy-policy.html">Политика конфиденциальности</a>
+    <span class="kb-legal-sep" aria-hidden="true">•</span>
+    <a href="terms-of-use.html">Пользовательское соглашение</a>
+    <span class="kb-legal-sep" aria-hidden="true">•</span>
+    <a href="privacy-policy.html#contacts">Вопросы по персональным данным</a>
+  </div>
+</div>
+
+<script src="privacy.js"></script>
+<!-- ============================================================
+     NEW CODE END — Юридический модуль
+     ============================================================ -->
+
+
+              <script>
+                              /* ============================================================
+   NEW CODE START — НОВЫЙ ФАЙЛ: privacy.js
+   Правовой модуль KubanAdventures:
+   1) cookie-баннер (показ при первом визите, «Принять»/«Отказаться»,
+      сохранение выбора в localStorage);
+   2) автоматическое добавление чекбокса «Согласен на обработку
+      персональных данных» во ВСЕ существующие формы на странице
+      (старый HTML при этом не изменяется) + блокировка отправки
+      формы без проставленного согласия.
+   Кроссбраузерно: Chrome, Firefox, Safari, Edge.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var CONSENT_KEY = 'kb_cookie_consent';
+  var POLICY_URL = 'privacy-policy.html';
+
+  /* ---------- Безопасная работа с localStorage (Safari private mode) ---------- */
+  function storageGet(key) {
+    try { return window.localStorage.getItem(key); } catch (e) { return null; }
+  }
+  function storageSet(key, value) {
+    try { window.localStorage.setItem(key, value); return true; } catch (e) { return false; }
+  }
+
+  /* ---------- Cookie-баннер ---------- */
+  function removeNode(node) {
+    if (node && node.parentNode) { node.parentNode.removeChild(node); }
+  }
+
+  function hideBanner() {
+    var banner = document.getElementById('kb-cookie-banner');
+    if (!banner) { return; }
+    banner.classList.add('kb-leaving');
+    window.setTimeout(function () { removeNode(banner); }, 320);
+  }
+
+  function clearSiteCookies() {
+    try {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var name = cookies[i].split('=')[0].replace(/^\s+|\s+$/g, '');
+        if (name) {
+          document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+        }
+      }
+    } catch (e) { /* игнорируем */ }
+  }
+
+  function initCookieBanner() {
+    var banner = document.getElementById('kb-cookie-banner');
+    if (!banner) { return; }
+
+    var choice = storageGet(CONSENT_KEY);
+    if (choice === 'accepted' || choice === 'declined') {
+      removeNode(banner);
+      return;
+    }
+
+    banner.classList.add('kb-visible');
+    var acceptBtn = document.getElementById('kb-cookie-accept');
+    var declineBtn = document.getElementById('kb-cookie-decline');
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', function () {
+        storageSet(CONSENT_KEY, 'accepted');
+        hideBanner();
+      });
+    }
+    if (declineBtn) {
+      declineBtn.addEventListener('click', function () {
+        storageSet(CONSENT_KEY, 'declined');
+        clearSiteCookies();
+        hideBanner();
+      });
+    }
+    try { acceptBtn.focus(); } catch (e) { /* игнорируем */ }
+  }
+
+  /* ---------- Чекбокс согласия в формы ---------- */
+  function injectConsentInto(form) {
+    if (!form || form.getAttribute('data-kb-consent') === 'added') { return; }
+    form.setAttribute('data-kb-consent', 'added');
+
+    var block = document.createElement('div');
+    block.className = 'kb-consent';
+
+    var label = document.createElement('label');
+    label.className = 'kb-consent-label';
+
+    var input = document.createElement('input');
+    input.type = 'checkbox';
+    input.className = 'kb-consent-input';
+    input.name = 'kb_personal_data_consent';
+
+    var box = document.createElement('span');
+    box.className = 'kb-consent-box';
+    box.setAttribute('aria-hidden', 'true');
+
+    var text = document.createElement('span');
+    text.className = 'kb-consent-text';
+    text.innerHTML = 'Я согласен(а) на обработку моих персональных данных в соответствии с <a href="' + POLICY_URL + '" target="_blank" rel="noopener noreferrer">Политикой конфиденциальности</a>';
+
+    label.appendChild(input);
+    label.appendChild(box);
+    label.appendChild(text);
+
+    var error = document.createElement('p');
+    error.className = 'kb-consent-error';
+    error.setAttribute('role', 'alert');
+    error.hidden = true;
+    error.textContent = 'Для продолжения необходимо отметить согласие на обработку персональных данных.';
+
+    block.appendChild(label);
+    block.appendChild(error);
+
+    /* Вставляем чекбокс перед кнопкой отправки формы */
+    var anchor = form.querySelector('button[type="submit"]') ||
+                 form.querySelector('input[type="submit"]') ||
+                 form.querySelector('button');
+    if (anchor && anchor.parentNode === form) {
+      form.insertBefore(block, anchor);
+    } else {
+      form.appendChild(block);
+    }
+
+    input.addEventListener('change', function () {
+      if (input.checked) {
+        error.hidden = true;
+        block.classList.remove('kb-consent-invalid');
+      }
+    });
+
+    /* Перехватываем отправку в фазе capture — раньше обработчиков сайта,
+       чтобы не пропустить форму без согласия */
+    form.addEventListener('submit', function (ev) {
+      if (!input.checked) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        error.hidden = false;
+        block.classList.add('kb-consent-invalid');
+        try { input.focus(); } catch (e) { /* игнорируем */ }
+        return false;
+      }
+      error.hidden = true;
+      block.classList.remove('kb-consent-invalid');
+    }, true);
+  }
+
+  function initFormConsent() {
+    var forms = document.getElementsByTagName('form');
+    for (var i = 0; i < forms.length; i++) {
+      injectConsentInto(forms[i]);
+    }
+
+    /* Подстраховка: если формы появятся на странице динамически */
+    if (typeof window.MutationObserver !== 'undefined') {
+      var observer = new MutationObserver(function (mutations) {
+        for (var m = 0; m < mutations.length; m++) {
+          var added = mutations[m].addedNodes;
+          for (var n = 0; n < added.length; n++) {
+            var node = added[n];
+            if (node.nodeType !== 1) { continue; }
+            if (node.tagName === 'FORM') { injectConsentInto(node); }
+            if (node.querySelectorAll) {
+              var nested = node.querySelectorAll('form');
+              for (var k = 0; k < nested.length; k++) { injectConsentInto(nested[k]); }
+            }
+          }
+        }
+      });
+      observer.observe(document.documentElement, { childList: true, subtree: true });
+    }
+  }
+
+  /* ---------- Инициализация ---------- */
+  function onReady(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn);
+    } else {
+      fn();
+    }
+  }
+
+  onReady(function () {
+    initCookieBanner();
+    initFormConsent();
+  });
+})();
+/* ============================================================
+   NEW CODE END — privacy.js
+   ============================================================ */
+
+
+              </script>
+                        </body>
+                        </html>
+                    

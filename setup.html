@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Запуск сайта — KubanAdventures</title>
+  <link rel="stylesheet" href="assets/css/setup.css">
+  <script src="assets/js/vendor/firebase-app-compat.js"></script>
+  <script src="assets/js/vendor/firebase-auth-compat.js"></script>
+  <script src="assets/js/vendor/firebase-firestore-compat.js"></script>
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+<body class="setup-page">
+  <header><a class="brand" href="index.html">KubanAdventures</a><nav aria-label="Навигация"><a href="index.html">На сайт</a><a href="admin.html">В админку</a></nav></header>
+  <main>
+    <div class="intro"><p class="eyebrow">Для владельца сайта</p><h1>Запуск без установки программ</h1><p>GitHub публикует витрину. Firebase хранит изменения и заявки. Всё настраивается через браузер — Python, терминал и отдельный сервер не нужны.</p></div>
+    <section class="connection" aria-labelledby="connection-title"><div><h2 id="connection-title">Подключение к базе</h2><p id="connectionStatus" role="status" aria-live="polite">Проверяем соединение…</p><p class="hint">Проверяется только чтение витрины. Права записи, почта и заявки подтверждаются отдельным тестом ниже.</p></div><button id="refreshConnection" type="button">Проверить снова</button></section>
+    <section class="step"><span class="step-number">01</span><div><h2>Опубликуй сайт на GitHub</h2><ol><li>Создай <strong>Public</strong>-репозиторий с именем <code>kuba</code>. Включи <strong>Add a README file</strong>.</li><li>В репозитории открой <strong>Settings → Pages → Source → GitHub Actions</strong>.</li><li>Распакуй архив и загрузи <strong>содержимое</strong> в корень репозитория: <code>index.html</code> должен быть сразу в корне. Обязательно загрузи папку <code>.github</code>.</li><li>Нажми <strong>Commit changes</strong>. Открой вкладку <strong>Actions</strong> и дождись зелёной галочки у <strong>Publish KUBA website</strong>.</li></ol><p>Ссылка появится в <strong>Settings → Pages</strong>. Следующие изменения файлов в основной ветке публикуются автоматически. Если первая попытка была до включения Pages, выбери <strong>Actions → Publish KUBA website → Run workflow</strong>.</p></div></section>
+    <section class="step"><span class="step-number">02</span><div><h2>Разреши домен сайта в Firebase</h2><p>В исходном коде уже указан проект <code id="firebaseProject">kubanadventures</code>. Для работы админки нужен доступ владельца к этому проекту.</p><p><a id="openAuthSettings" class="action" href="https://console.firebase.google.com/" target="_blank" rel="noopener">Открыть настройки Firebase Auth ↗</a></p><p>В <strong>Authentication → Settings → Authorized domains</strong> нажми <strong>Add domain</strong> и вставь:</p><div class="copy-row"><code id="siteDomain">Домен опубликованного сайта</code><button id="copyDomain" type="button">Скопировать</button></div><p class="hint">Только домен, без https:// и пути репозитория. При локальном открытии файла здесь нет домена GitHub — этот шаг делается после публикации.</p><p>В <strong>Authentication → Sign-in method</strong> включи <strong>Email/Password</strong>, если он ещё выключен.</p><p class="hint">Если указанный Firebase-проект не твой или больше не существует, потребуется свой проект. Его web-конфигурация заменяется в <code>assets/js/config.js</code> через редактор GitHub; GitHub не создаёт облачную базу сам.</p></div></section>
+    <section class="step"><span class="step-number">03</span><div><h2>Примени правила доступа</h2><p><a id="openFirestore" class="action" href="https://console.firebase.google.com/" target="_blank" rel="noopener">Открыть Firestore ↗</a></p><p>Если базы нет, создай <strong>Firestore Database</strong>. Во вкладке <strong>Rules</strong> вставь готовые правила из файла <code>firestore.rules</code> в репозитории и нажми <strong>Publish</strong>.</p><p class="warning">Если в этом Firebase-проекте уже работают другие приложения, не заменяй их правила целиком: сначала сохрани копию и согласуй правила. Наш файл запрещает доступ к прочим коллекциям. Не включай «доступ всем на запись».</p><p>Посетители читают витрину. Менять её может только владелец с подтверждённой почтой. Заявку видит только её автор или администратор.</p></div></section>
+    <section class="step"><span class="step-number">04</span><div><h2>Войди и проверь изменения</h2><p>Администратор в исходном проекте: <strong id="adminEmail"></strong>. Пароль не лежит в архиве: используй пароль своего Firebase-аккаунта, не пароль GitHub или почтового ящика.</p><ol><li>Если аккаунта ещё нет, создай его через <strong>Authentication → Users → Add user</strong>. Если он уже есть — не создавай дубликат.</li><li>Открой админку, введи правильный пароль. При неподтверждённой почте нажми <strong>Подтвердить email</strong>, открой письмо, перейди на главную страницу, нажми «Выйти» и войди в админку снова.</li><li>Измени заголовок и нажми <strong>Сохранить и опубликовать тексты</strong>.</li><li>Открой сайт в другом браузере или на телефоне. Заголовок должен обновиться без перезагрузки. Отправь тестовую заявку и проверь её статус в кабинете.</li></ol><p><a class="action" href="admin.html">Перейти в админку →</a></p></div></section>
+    <section class="note"><h2>Что готово, а что требует твоих данных</h2><p>Обложки, дизайн, мобильная версия, формы и синхронизация включены в архив. Сайт показывает исходный каталог даже до подключения базы, но отправка реальных заявок и публикация через админку требуют настроенного Firebase.</p><p>В пяти регионах исходного проекта не было туров. Их можно добавить в админке. Перед публичной рекламой проверь цены, контакты и заявления о сертификатах; до сбора персональных данных добавь согласованную политику обработки данных. Обложки — AI-иллюстрации, не документальные снимки маршрутов.</p></section>
+    <p id="copyStatus" class="copy-status" role="status" aria-live="polite"></p>
+  </main>
+  <footer>Страница помощи владельцу · никакие ключи администратора или пароли здесь не запрашиваются</footer>
+  <script src="assets/js/defaults.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/store.js"></script>
+  <script src="assets/js/setup.js"></script>
+</body>
+</html>
